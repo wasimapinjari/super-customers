@@ -1,6 +1,6 @@
+import { useAppSelector } from "@/redux/hooks";
 import { ComponentPropsWithRef, ForwardedRef, forwardRef } from "react";
 import Spinner from "./Spinner";
-import { useAppSelector } from "@/redux/hooks";
 
 type Props = ComponentPropsWithRef<"input"> & {
   label: string;

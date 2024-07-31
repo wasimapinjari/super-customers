@@ -10,7 +10,7 @@ import {
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useRouter } from "next/navigation";
 import { ReactNode, useEffect, useRef } from "react";
-import { FieldErrors, FieldValues, useForm, useWatch } from "react-hook-form";
+import { FieldValues, useForm } from "react-hook-form";
 import Address from "./Address";
 import InputText from "./InputText";
 
@@ -32,12 +32,9 @@ export default function Form({
 }) {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { addressIndex, fullName, city, state } = useAppSelector(
-    (state) => state.form,
-  );
+  const { addressIndex, fullName } = useAppSelector((state) => state.form);
 
-  const { register, watch, unregister, setValue, handleSubmit, formState } =
-    useForm();
+  const { register, unregister, setValue, handleSubmit, formState } = useForm();
 
   const addressElement = useRef((index: number) => (
     <Address

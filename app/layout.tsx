@@ -1,7 +1,7 @@
-import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
-import "./globals.css";
+import type { Metadata } from "next";
 import ReduxProvider from "../redux/Provider";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Super-Customers",

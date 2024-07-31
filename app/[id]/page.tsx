@@ -1,9 +1,5 @@
 "use client";
 
-export async function generateStaticParams() {
-  return [];
-}
-
 import { useAppSelector } from "@/redux/hooks";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";

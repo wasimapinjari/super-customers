@@ -1,17 +1,10 @@
-"use client";
+export async function generateStaticParams() {
+  return store.getState().customers.map((customer) => ({ id: customer.id }));
+}
 
-import { useAppSelector } from "@/redux/hooks";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
-import Form from "../_components/Form";
+import store from "@/redux/store";
+import FormWithID from "../_components/FormWithID";
 
 export default function CustomerForm({ params }: { params: { id: string } }) {
-  const router = useRouter();
-  const customer = useAppSelector((state) =>
-    state.customers.find((customer) => customer.id === params.id),
-  );
-  useEffect(() => {
-    if (!customer) router.push("/");
-  }, [customer, router]);
-  return <Form customerData={customer} />;
+  return <FormWithID id={params.id} />;
 }

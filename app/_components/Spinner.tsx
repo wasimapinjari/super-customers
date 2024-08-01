@@ -1,4 +1,4 @@
-export default function Spinner() {
+export default function Spinner({ className }: { className?: string }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -6,7 +6,7 @@ export default function Spinner() {
       viewBox="0 0 24 24"
       strokeWidth="1.5"
       stroke="currentColor"
-      className="mb-1 inline w-4 animate-spin"
+      className={`animate-spin ${className}`}
     >
       <path
         strokeLinecap="round"

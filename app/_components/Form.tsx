@@ -120,7 +120,7 @@ export default function Form({
   return (
     <form key={formKey} onSubmit={handleSubmit(onSubmit)}>
       {/* Client side validation can be bypassed, backend validation is required for robust code */}
-      <div className="mb-4 grid min-w-[30rem] grid-cols-2 gap-x-6 gap-y-4 sm:min-w-[15rem] sm:grid-cols-1">
+      <div className="xs:min-w-full mb-4 grid min-w-[30rem] grid-cols-2 gap-x-6 gap-y-4 sm:min-w-[20rem] sm:grid-cols-1">
         <InputText
           label="PAN"
           spinner={true}

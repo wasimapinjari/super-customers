@@ -45,9 +45,9 @@ export default function Main() {
               <div className="text-sm tracking-[0.01] text-gray-400 sm:text-center">
                 <p>{customer.pan}</p>
                 <p>
-                  {customer.email.length < 25
+                  {customer.email.length < 20
                     ? customer.email
-                    : customer.email.substring(0, 25) + "..."}
+                    : customer.email.substring(0, 20) + "..."}
                 </p>
                 <p>+91 {customer.mobileNumber}</p>
               </div>

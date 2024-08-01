@@ -93,15 +93,9 @@ export default function Form({
   }
   function handleDeleteAddress() {
     setAddresses((a) => a.slice(0, a.length - 1));
-    setAddresses((a) => {
-      console.log(a);
-      console.log(addresses.length - 1);
-      return a;
-    });
     addressKeys.forEach((key) => unregister(`${key}-${addresses.length - 1}`));
   }
   function onSubmit(data: FieldValues) {
-    console.log(data);
     const customer: Record<string, any> = {
       id: crypto.randomUUID(),
       addresses: [],
@@ -122,7 +116,6 @@ export default function Form({
       ? dispatch(updateCustomer({ ...customer, id: data.id }))
       : dispatch(addCustomer(customer));
     router.push("/");
-    // console.log({ ...customer, id: data.id });
   }
   return (
     <form key={formKey} onSubmit={handleSubmit(onSubmit)}>
@@ -220,10 +213,7 @@ export default function Form({
       <p className="mb-2">Address</p>
 
       <div className="space-y-4">
-        {addresses.map((address: JSX.Element) => {
-          console.log(address);
-          return address;
-        })}
+        {addresses.map((address: JSX.Element) => address)}
       </div>
 
       <div className="flex justify-between gap-4 sm:flex-col sm:gap-2">

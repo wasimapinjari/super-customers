@@ -6,7 +6,6 @@ export default function Main() {
   const router = useRouter();
   const customers = useAppSelector((state) => state.customers);
   const dispatch = useAppDispatch();
-  console.log(customers);
   return (
     <div className="flex flex-col items-center justify-center px-8 sm:min-w-80">
       <button

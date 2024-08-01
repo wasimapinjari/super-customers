@@ -85,10 +85,11 @@ export default function Form({
   }
   function handleDeleteAddress() {
     addresses.current.pop();
-    addressKeys.forEach((key) => unregister(`${key}-${addressIndex}`));
+    addressKeys.forEach((key) => unregister(`${key}-${addressIndex - 1}`));
     dispatch(setIndex(addressIndex - 1));
   }
   function onSubmit(data: FieldValues) {
+    console.log(data);
     const customer: Record<string, any> = {
       id: crypto.randomUUID(),
       addresses: [],

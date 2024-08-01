@@ -3,6 +3,7 @@ import { AppDispatch } from "./store";
 
 const initialState = {
   isLoading: false,
+  pan: "",
   fullName: "",
   state: [] as string[],
   city: [] as string[],
@@ -15,6 +16,9 @@ const formSlice = createSlice({
   reducers: {
     setLoading(state, action) {
       state.isLoading = action.payload;
+    },
+    setPan(state, action) {
+      state.pan = action.payload;
     },
     setName(state, action) {
       state.fullName = action.payload;
@@ -35,7 +39,7 @@ const formSlice = createSlice({
 
 export default formSlice.reducer;
 
-export const { setLoading, setName, setCity, setState, setFocus } =
+export const { setLoading, setPan, setName, setCity, setState, setFocus } =
   formSlice.actions;
 
 const url = "https://lab.pixel6.co/api/";

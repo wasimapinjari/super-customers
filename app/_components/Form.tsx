@@ -1,5 +1,12 @@
 import { addCustomer, updateCustomer } from "@/redux/customerSlice";
-import { setCity, setFocus, setState, validatePAN } from "@/redux/formSlice";
+import {
+  setCity,
+  setFocus,
+  setName,
+  setPan,
+  setState,
+  validatePAN,
+} from "@/redux/formSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useRouter } from "next/navigation";
 import { ReactNode, useEffect, useRef, useState } from "react";
@@ -23,7 +30,7 @@ export default function Form({
   const router = useRouter();
 
   const dispatch = useAppDispatch();
-  const { fullName } = useAppSelector((state) => state.form);
+  const { fullName, pan } = useAppSelector((state) => state.form);
 
   const { register, unregister, setValue, handleSubmit, formState } = useForm();
   const [addresses, setAddresses] = useState<JSX.Element[]>([]);
@@ -63,7 +70,7 @@ export default function Form({
 
   useEffect(() => {
     setValue("name", fullName);
-  }, [fullName, setValue]);
+  }, [fullName, setValue, pan]);
 
   useEffect(() => {
     fillData.current();
@@ -138,6 +145,7 @@ export default function Form({
               setValue("pan", e.target.value.toUpperCase());
               dispatch(validatePAN(e.target.value));
               dispatch(setFocus("pan"));
+              dispatch(setPan(e.target.value));
             },
           })}
         />
@@ -154,6 +162,9 @@ export default function Form({
             maxLength: {
               value: 140,
               message: "Maximum Name Characters Limit: 140)",
+            },
+            onChange: (e) => {
+              dispatch(setName(e.target.value));
             },
           })}
         />

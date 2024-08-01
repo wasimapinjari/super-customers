@@ -1,9 +1,8 @@
 import selectData from "@/data/selectData";
 import { getPostCode, setCity, setFocus, setState } from "@/redux/formSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { FieldValues, UseFormRegister, UseFormSetValue } from "react-hook-form";
-import { states } from "./Form";
 import InputText from "./InputText";
 
 export default function Address({
@@ -17,10 +16,14 @@ export default function Address({
 }) {
   const dispatch = useAppDispatch();
   const { state, city } = useAppSelector((state) => state.form);
+  const [cities, setCities] = useState<string[]>([]);
+  useEffect(() => {
+    setCities(selectData[state[index]]);
+  }, [state, index]);
   useEffect(() => {
     setValue(`state-${index}`, state[index]);
     setValue(`city-${index}`, city[index]);
-  }, [city, index, setValue, state]);
+  }, [city, index, setValue, state, cities]);
   return (
     <div className="g-4 mb-2 flex flex-col justify-between space-y-4 rounded-md border-2 border-solid border-gray-400 p-4 sm:mb-0">
       <InputText
@@ -74,7 +77,7 @@ export default function Address({
               })}
             >
               <option value="" />
-              {states.map((state) => (
+              {Object.keys(selectData).map((state) => (
                 <option key={state}>{state}</option>
               ))}
             </select>
@@ -94,7 +97,7 @@ export default function Address({
               })}
             >
               <option value="" />
-              {selectData.map(({ city }, index) => (
+              {cities?.map((city, index) => (
                 <option key={index}>{city}</option>
               ))}
             </select>

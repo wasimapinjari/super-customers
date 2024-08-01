@@ -14,9 +14,6 @@ import { FieldValues, useForm } from "react-hook-form";
 import Address from "./Address";
 import InputText from "./InputText";
 
-export const states: string[] = [];
-selectData.forEach(({ state }) => states.includes(state) || states.push(state));
-
 const addressKeys = [
   "addressLine1",
   "addressLine2",

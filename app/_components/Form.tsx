@@ -173,6 +173,7 @@ export default function Form({
         <InputText
           label="Email"
           type="email"
+          className="lowercase"
           {...register("email", {
             required: {
               value: true,
@@ -188,6 +189,9 @@ export default function Form({
             maxLength: {
               value: 255,
               message: "Maximum Email Characters Limit: 255",
+            },
+            onChange: (e) => {
+              setValue("email", e.target.value.toLowerCase());
             },
           })}
         />

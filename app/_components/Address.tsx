@@ -85,7 +85,7 @@ export default function Address({
           <label className="flex flex-col gap-1">
             City
             <select
-              className="block h-7 min-w-[6.2rem] rounded-md border-2 border-solid border-gray-400 bg-[#222] pl-[.15rem] text-white"
+              className="block h-7 min-w-48 rounded-md border-2 border-solid border-gray-400 bg-[#222] pl-[.15rem] text-white"
               {...register(`city-${index}`, {
                 required: {
                   value: true,

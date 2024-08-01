@@ -19,7 +19,7 @@ export default function RootLayout({
         <ReduxProvider>
           <main className="grid place-items-center">
             <div className="my-10 flex flex-col items-center">
-              <h1 className="mb-8 bg-gradient-to-b from-[white] to-[#fff0] to-[200%] bg-clip-text p-8 text-center text-5xl tracking-tight text-transparent">
+              <h1 className="mb-8 bg-gradient-to-b from-[white] to-[#fff0] to-[200%] bg-clip-text py-8 text-center text-5xl tracking-tight text-transparent">
                 Super-Customers
               </h1>
               {children}

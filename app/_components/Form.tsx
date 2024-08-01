@@ -23,8 +23,10 @@ const addressKeys = [
 ];
 
 export default function Form({
+  formKey,
   customerData,
 }: {
+  formKey?: string;
   customerData?: Record<string, any>;
 }) {
   const router = useRouter();
@@ -123,7 +125,7 @@ export default function Form({
     // console.log({ ...customer, id: data.id });
   }
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form key={formKey} onSubmit={handleSubmit(onSubmit)}>
       {/* Client side validation can be bypassed, backend validation is required for robust code */}
       <div className="mb-4 grid min-w-[30rem] grid-cols-2 gap-x-6 gap-y-4 sm:min-w-[15rem] sm:grid-cols-1">
         <InputText

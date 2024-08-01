@@ -1,15 +1,8 @@
-import selectData from "@/data/selectData";
 import { addCustomer, updateCustomer } from "@/redux/customerSlice";
-import {
-  setCity,
-  setFocus,
-  setIndex,
-  setState,
-  validatePAN,
-} from "@/redux/formSlice";
+import { setCity, setFocus, setState, validatePAN } from "@/redux/formSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useRouter } from "next/navigation";
-import { ReactNode, useEffect, useRef } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import Address from "./Address";
 import InputText from "./InputText";
@@ -28,10 +21,12 @@ export default function Form({
   customerData?: Record<string, any>;
 }) {
   const router = useRouter();
+
   const dispatch = useAppDispatch();
-  const { addressIndex, fullName } = useAppSelector((state) => state.form);
+  const { fullName } = useAppSelector((state) => state.form);
 
   const { register, unregister, setValue, handleSubmit, formState } = useForm();
+  const [addresses, setAddresses] = useState<JSX.Element[]>([]);
 
   const addressElement = useRef((index: number) => (
     <Address
@@ -47,14 +42,14 @@ export default function Form({
         customerData?.["addresses"][index][key];
       const setAddressValue = (index: string, key: string) =>
         setValue(`${key}-${index}`, addressData(index, key));
+      setAddresses([]);
       for (const key in customerData) {
         if (key === "addresses") {
           for (const index in customerData["addresses"]) {
-            if (index) {
-              if (index === "0") addresses.current = [];
-              addresses.current.push(addressElement.current(+index));
-              dispatch(setIndex(addresses.current.length));
-            }
+            setAddresses((a: JSX.Element[]) => [
+              ...a,
+              addressElement.current(+index),
+            ]);
             addressKeys.forEach((key) => setAddressValue(index, key));
             dispatch(setState({ index, state: addressData(index, "state") }));
             dispatch(setCity({ index, city: addressData(index, "city") }));
@@ -66,8 +61,6 @@ export default function Form({
     }
   });
 
-  const addresses = useRef([addressElement.current(0)]);
-
   useEffect(() => {
     setValue("name", fullName);
   }, [fullName, setValue]);
@@ -76,17 +69,27 @@ export default function Form({
     fillData.current();
   }, []);
 
+  if (!customerData && !addresses.length) {
+    setAddresses([addressElement.current(0)]);
+  }
+
   const { errors } = formState;
 
   function handleAddAddress() {
-    if (addressIndex === 9) return;
-    addresses.current.push(addressElement.current(addresses.current.length));
-    dispatch(setIndex(addressIndex + 1));
+    if (addresses.length === 10) return;
+    setAddresses((a: JSX.Element[]) => [
+      ...a,
+      addressElement.current(addresses.length),
+    ]);
   }
   function handleDeleteAddress() {
-    addresses.current.pop();
-    addressKeys.forEach((key) => unregister(`${key}-${addressIndex - 1}`));
-    dispatch(setIndex(addressIndex - 1));
+    setAddresses((a) => a.slice(0, a.length - 1));
+    setAddresses((a) => {
+      console.log(a);
+      console.log(addresses.length - 1);
+      return a;
+    });
+    addressKeys.forEach((key) => unregister(`${key}-${addresses.length - 1}`));
   }
   function onSubmit(data: FieldValues) {
     console.log(data);
@@ -107,11 +110,11 @@ export default function Form({
       customer[field] = data[field];
     }
     customerData
-      ? dispatch(updateCustomer({ id: data.id, data }))
+      ? dispatch(updateCustomer({ ...customer, id: data.id }))
       : dispatch(addCustomer(customer));
     router.push("/");
+    // console.log({ ...customer, id: data.id });
   }
-
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       {/* Client side validation can be bypassed, backend validation is required for robust code */}
@@ -119,6 +122,7 @@ export default function Form({
         <InputText
           label="PAN"
           spinner={true}
+          className="uppercase"
           inputName="pan"
           {...register("pan", {
             required: {
@@ -131,6 +135,7 @@ export default function Form({
               message: "Input Valid 10-Character PAN",
             },
             onChange: (e) => {
+              setValue("pan", e.target.value.toUpperCase());
               dispatch(validatePAN(e.target.value));
               dispatch(setFocus("pan"));
             },
@@ -198,12 +203,15 @@ export default function Form({
       <p className="mb-2">Address</p>
 
       <div className="space-y-4">
-        {addresses.current.map((address) => address)}
+        {addresses.map((address: JSX.Element) => {
+          console.log(address);
+          return address;
+        })}
       </div>
 
       <div className="flex justify-between gap-4 sm:flex-col sm:gap-2">
         <div className="flex gap-4 sm:gap-2">
-          {addresses.current.length < 10 && (
+          {addresses.length < 10 && (
             <button
               className="py-2 hover:text-green-300"
               type="button"
@@ -212,7 +220,7 @@ export default function Form({
               Add
             </button>
           )}
-          {addresses.current.length > 1 && (
+          {addresses.length > 1 && (
             <button
               className="py-2 hover:text-red-400"
               type="button"

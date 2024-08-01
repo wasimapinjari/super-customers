@@ -75,7 +75,7 @@ const customerSlice = createSlice({
       const index = state.findIndex(
         (customer) => customer.id === action.payload.id,
       );
-      state[index] = action.payload.data;
+      state[index] = action.payload;
     },
   },
 });

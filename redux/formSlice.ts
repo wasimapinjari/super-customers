@@ -6,7 +6,6 @@ const initialState = {
   fullName: "",
   state: [] as string[],
   city: [] as string[],
-  addressIndex: 0,
   focusInput: "",
 };
 
@@ -28,9 +27,6 @@ const formSlice = createSlice({
       const { index, city } = action.payload;
       state.city[index] = city;
     },
-    setIndex(state, action) {
-      state.addressIndex = action.payload;
-    },
     setFocus(state, action) {
       state.focusInput = action.payload;
     },
@@ -39,7 +35,7 @@ const formSlice = createSlice({
 
 export default formSlice.reducer;
 
-export const { setLoading, setName, setCity, setState, setIndex, setFocus } =
+export const { setLoading, setName, setCity, setState, setFocus } =
   formSlice.actions;
 
 const url = "https://lab.pixel6.co/api/";

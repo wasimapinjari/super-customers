@@ -45,9 +45,6 @@ const addressKeys = [
   "city",
 ] as const;
 
-const isKeyOfFormMain = (k: string): k is keyof FormMain =>
-  addressKeys.map((key) => k.startsWith(key)).includes(true) ? false : true;
-
 export default function Form({
   customerData,
 }: {
@@ -103,7 +100,7 @@ export default function Form({
           }
           continue;
         }
-        if (isKeyOfFormMain(key)) setValue(key, customerData[key]);
+        setValue(key, customerData[key]);
       }
     }
   });

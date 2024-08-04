@@ -29,7 +29,7 @@ type FormMain = {
   mobileNumber: number;
 };
 
-type AddressNumber = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
+export type AddressNumber = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 
 type FormAddress = {
   [K in (typeof addressKeys)[number] as `${K}-${AddressNumber}`]: K extends "postCode"
@@ -65,7 +65,7 @@ export default function Form({
 
   const [addresses, setAddresses] = useState<JSX.Element[]>([]);
 
-  const addressElement = useRef((index: number) => (
+  const addressElement = useRef((index: AddressNumber) => (
     <Address
       key={index}
       index={index}
@@ -92,7 +92,7 @@ export default function Form({
             const index = +addressIndex as AddressNumber;
             setAddresses((a: JSX.Element[]) => [
               ...a,
-              addressElement.current(+index),
+              addressElement.current(index),
             ]);
             addressKeys.forEach((key) => setAddressValue(index, key));
             dispatch(setState({ index, state: addressData(index, "state") }));
@@ -120,7 +120,7 @@ export default function Form({
     if (addresses.length === 10) return;
     setAddresses((a: JSX.Element[]) => [
       ...a,
-      addressElement.current(addresses.length),
+      addressElement.current(addresses.length as AddressNumber),
     ]);
   }
 

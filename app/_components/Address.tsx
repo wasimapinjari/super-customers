@@ -2,16 +2,16 @@ import selectData from "@/data/selectData";
 import { getPostCode, setCity, setFocus, setState } from "@/redux/formSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useEffect, useState } from "react";
-import { FieldValues, UseFormRegister, UseFormSetValue } from "react-hook-form";
+import { UseFormRegister, UseFormSetValue } from "react-hook-form";
+import { AddressNumber, Form } from "./Form";
 import InputText from "./InputText";
-import { Form } from "./Form";
 
 export default function Address({
   index,
   register,
   setValue,
 }: {
-  index: number;
+  index: AddressNumber;
   register: UseFormRegister<Form>;
   setValue: UseFormSetValue<Form>;
 }) {
@@ -69,7 +69,7 @@ export default function Address({
           <label className="flex flex-col gap-1">
             State
             <select
-              className="block h-7 min-w-[6.2rem] rounded-md border-2 border-solid border-gray-400 bg-[#222] pl-[.15rem] text-slate-200"
+              className="block h-7 min-w-[6.2rem] rounded-md border-2 border-solid border-gray-400 bg-[#222] pl-[.15rem] text-slate-200 hover:bg-zinc-800"
               {...register(`state-${index}`, {
                 required: {
                   value: true,
@@ -89,7 +89,7 @@ export default function Address({
           <label className="flex flex-col gap-1">
             City
             <select
-              className="block h-7 min-w-48 rounded-md border-2 border-solid border-gray-400 bg-[#222] pl-[.15rem] text-white"
+              className="block h-7 min-w-48 rounded-md border-2 border-solid border-gray-400 bg-[#222] pl-[.15rem] text-white hover:bg-zinc-800"
               {...register(`city-${index}`, {
                 required: {
                   value: true,

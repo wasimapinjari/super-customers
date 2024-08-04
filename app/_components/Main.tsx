@@ -20,7 +20,7 @@ export default function Main() {
           return (
             <div
               key={customer.id}
-              className="flex min-w-80 flex-col rounded-md border-2 border-solid border-gray-400 px-4 py-2 sm:min-w-max"
+              className="flex min-w-80 flex-col rounded-md border-2 border-solid border-gray-400 px-4 py-2 hover:bg-zinc-800 sm:min-w-max"
             >
               <div className="mb-2 flex items-center justify-between gap-4 text-nowrap sm:flex-col sm:gap-0">
                 <h2 className="border-b-2 border-solid border-white text-lg sm:mb-2">

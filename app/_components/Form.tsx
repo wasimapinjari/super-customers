@@ -1,6 +1,5 @@
 import {
   addCustomer,
-  CustomerKeys,
   CustomerState,
   updateCustomer,
 } from "@/redux/customerSlice";

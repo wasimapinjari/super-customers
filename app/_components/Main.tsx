@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 
 export default function Main() {
   const router = useRouter();
+
   const customers = useAppSelector((state) => state.customers);
   const dispatch = useAppDispatch();
   return (

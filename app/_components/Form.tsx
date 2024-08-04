@@ -1,5 +1,6 @@
 import { addCustomer, updateCustomer } from "@/redux/customerSlice";
 import {
+  resetForm,
   setCity,
   setFocus,
   setName,
@@ -23,18 +24,23 @@ const addressKeys = [
 ];
 
 export default function Form({
-  formKey,
   customerData,
 }: {
-  formKey?: string;
   customerData?: Record<string, any>;
 }) {
   const router = useRouter();
 
-  const dispatch = useAppDispatch();
   const { fullName, pan } = useAppSelector((state) => state.form);
+  const dispatch = useAppDispatch();
 
-  const { register, unregister, setValue, handleSubmit, formState } = useForm();
+  const {
+    register,
+    setValue,
+    unregister,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
   const [addresses, setAddresses] = useState<JSX.Element[]>([]);
 
   const addressElement = useRef((index: number) => (
@@ -45,6 +51,7 @@ export default function Form({
       setValue={setValue}
     />
   ));
+
   const fillData = useRef(() => {
     if (customerData) {
       const addressData = (index: string, key: string) =>
@@ -76,13 +83,10 @@ export default function Form({
 
   useEffect(() => {
     fillData.current();
-  }, []);
+  }, [dispatch]);
 
-  if (!customerData && !addresses.length) {
+  if (!customerData && !addresses.length)
     setAddresses([addressElement.current(0)]);
-  }
-
-  const { errors } = formState;
 
   function handleAddAddress() {
     if (addresses.length === 10) return;
@@ -91,10 +95,12 @@ export default function Form({
       addressElement.current(addresses.length),
     ]);
   }
+
   function handleDeleteAddress() {
     setAddresses((a) => a.slice(0, a.length - 1));
     addressKeys.forEach((key) => unregister(`${key}-${addresses.length - 1}`));
   }
+
   function onSubmit(data: FieldValues) {
     const customer: Record<string, any> = {
       id: crypto.randomUUID(),
@@ -116,11 +122,12 @@ export default function Form({
       ? dispatch(updateCustomer({ ...customer, id: data.id }))
       : dispatch(addCustomer(customer));
     router.push("/");
+    dispatch(resetForm());
   }
   return (
-    <form key={formKey} onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       {/* Client side validation can be bypassed, backend validation is required for robust code */}
-      <div className="xs:min-w-full mb-4 grid min-w-[30rem] grid-cols-2 gap-x-6 gap-y-4 sm:min-w-[20rem] sm:grid-cols-1">
+      <div className="mb-4 grid min-w-[30rem] grid-cols-2 gap-x-6 gap-y-4 sm:min-w-[20rem] sm:grid-cols-1 xs:min-w-full">
         <InputText
           label="PAN"
           spinner={true}
@@ -241,7 +248,10 @@ export default function Form({
           <button
             className="py-2 hover:text-red-400 sm:flex-grow sm:text-right"
             type="button"
-            onClick={() => router.push("/")}
+            onClick={() => {
+              router.push("/");
+              dispatch(resetForm());
+            }}
           >
             Cancel
           </button>

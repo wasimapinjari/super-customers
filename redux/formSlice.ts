@@ -3,44 +3,61 @@ import { AppDispatch } from "./store";
 
 const initialState = {
   isLoading: false,
-  pan: "",
+  focusInput: "",
   fullName: "",
+  pan: "",
   state: [] as string[],
   city: [] as string[],
-  focusInput: "",
 };
 
 const formSlice = createSlice({
   name: "form",
   initialState,
   reducers: {
-    setLoading(state, action) {
-      state.isLoading = action.payload;
+    setLoading(prevState, action) {
+      prevState.isLoading = action.payload;
     },
-    setPan(state, action) {
-      state.pan = action.payload;
+    setPan(prevState, action) {
+      prevState.pan = action.payload;
     },
-    setName(state, action) {
-      state.fullName = action.payload;
+    setName(prevState, action) {
+      prevState.fullName = action.payload;
     },
     setState(prevState, action) {
       const { index, state } = action.payload;
       prevState.state[index] = state;
     },
-    setCity(state, action) {
+    setCity(prevState, action) {
       const { index, city } = action.payload;
-      state.city[index] = city;
+      prevState.city[index] = city;
     },
-    setFocus(state, action) {
-      state.focusInput = action.payload;
+    setFocus(prevState, action) {
+      prevState.focusInput = action.payload;
+    },
+    resetForm(prevState) {
+      prevState = {
+        isLoading: false,
+        focusInput: "",
+        fullName: "",
+        pan: "",
+        state: [],
+        city: [],
+      };
     },
   },
 });
 
 export default formSlice.reducer;
 
-export const { setLoading, setPan, setName, setCity, setState, setFocus } =
-  formSlice.actions;
+export const {
+  setLoading,
+  setPan,
+  setName,
+  setCity,
+  setState,
+  setFocus,
+  resetForm,
+} = formSlice.actions;
 
 const url = "https://lab.pixel6.co/api/";
 
@@ -57,7 +74,7 @@ export const validatePAN = (payload: string) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          panNumber: "payload",
+          panNumber: payload,
         }),
       });
       if (!res.ok) {

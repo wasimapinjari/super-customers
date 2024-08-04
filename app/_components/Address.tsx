@@ -14,12 +14,15 @@ export default function Address({
   register: UseFormRegister<FieldValues>;
   setValue: UseFormSetValue<FieldValues>;
 }) {
-  const dispatch = useAppDispatch();
   const { state, city } = useAppSelector((state) => state.form);
+  const dispatch = useAppDispatch();
+
   const [cities, setCities] = useState<string[]>([]);
+
   useEffect(() => {
     setCities(selectData[state[index]]);
   }, [state, index]);
+
   useEffect(() => {
     setValue(`state-${index}`, state[index]);
     setValue(`city-${index}`, city[index]);

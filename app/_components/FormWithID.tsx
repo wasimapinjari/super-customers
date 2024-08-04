@@ -13,5 +13,5 @@ export default function FormWithID({ id }: { id: string }) {
   useEffect(() => {
     if (!customer) router.push("/");
   }, [customer, router]);
-  return <Form formKey={id} customerData={customer} />;
+  return <Form customerData={customer} />;
 }

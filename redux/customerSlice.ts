@@ -11,14 +11,14 @@ export const initialState = [
       {
         addressLine1: "Madhav Park",
         addressLine2: "M.G Road",
-        postCode: 322372,
+        postCode: 422001,
         state: "Maharashtra",
         city: "Nasik",
       },
       {
         addressLine1: "Shiv Park",
         addressLine2: "A.K Nagar",
-        postCode: 122103,
+        postCode: 560001,
         state: "Karnataka",
         city: "Bangalore",
       },
@@ -34,7 +34,7 @@ export const initialState = [
       {
         addressLine1: "A.B Colony",
         addressLine2: "Pink Road",
-        postCode: 828012,
+        postCode: 452001,
         state: "Madhya Pradesh",
         city: "Indore",
       },
@@ -50,7 +50,7 @@ export const initialState = [
       {
         addressLine1: "Diamond Street",
         addressLine2: "Purple Valley",
-        postCode: 397390,
+        postCode: 302003,
         state: "Rajasthan",
         city: "Jaipur",
       },

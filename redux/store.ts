@@ -1,5 +1,4 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { useDispatch, useSelector } from "react-redux";
 import customerSlice from "./customerSlice";
 import formSlice from "./formSlice";
 

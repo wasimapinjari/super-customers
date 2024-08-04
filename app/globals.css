@@ -1,3 +1,30 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .scrollbar::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+    border-radius: 100vh;
+    background: transparent;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 100vh;
+    border: 2px solid #aaa;
+    transition: all 0.3s ease-out;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #222;
+  }
+
+  .gradient {
+    background: radial-gradient(purple, black);
+  }
+}

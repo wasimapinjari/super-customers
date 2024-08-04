@@ -30,7 +30,7 @@ export default function Main() {
                 </h2>
                 <div className="space-x-2">
                   <button
-                    className="hover:text-green-300"
+                    className="hover:text-green-400"
                     onClick={() => router.push("/" + customer.id)}
                   >
                     Edit

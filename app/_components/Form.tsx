@@ -211,6 +211,9 @@ export default function Form({
                   value: /^[0-9]{10}$/,
                   message: "Please Enter Valid 10 Digit Number",
                 },
+                onChange: (e) => {
+                  setValue("number", e.target.value.toLowerCase());
+                },
               })}
             />
           </div>

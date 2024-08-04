@@ -35,14 +35,12 @@ const formSlice = createSlice({
       prevState.focusInput = action.payload;
     },
     resetForm(prevState) {
-      prevState = {
-        isLoading: false,
-        focusInput: "",
-        fullName: "",
-        pan: "",
-        state: [],
-        city: [],
-      };
+      prevState.isLoading = false;
+      prevState.focusInput = "";
+      prevState.fullName = "";
+      prevState.pan = "";
+      prevState.state = [];
+      prevState.city = [];
     },
   },
 });

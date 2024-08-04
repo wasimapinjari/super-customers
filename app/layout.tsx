@@ -15,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={GeistSans.className}>
-      <body className="h-screen bg-[#222] text-slate-200">
+      <body className="scroll h-screen bg-[#222] text-slate-200">
         <ReduxProvider>
           <main className="grid place-items-center">
             <div className="my-10 flex flex-col items-center">

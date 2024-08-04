@@ -24,9 +24,9 @@ export default function Main() {
             >
               <div className="mb-2 flex items-center justify-between gap-4 text-nowrap sm:flex-col sm:gap-0">
                 <h2 className="border-b-2 border-solid border-white text-lg sm:mb-2">
-                  {customer.name.length < 20
-                    ? customer.name
-                    : customer.name.substring(0, 20) + "..."}
+                  {customer.fullName.length < 20
+                    ? customer.fullName
+                    : customer.fullName.substring(0, 20) + "..."}
                 </h2>
                 <div className="space-x-2">
                   <button

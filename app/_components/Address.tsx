@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useEffect, useState } from "react";
 import { FieldValues, UseFormRegister, UseFormSetValue } from "react-hook-form";
 import InputText from "./InputText";
+import { Form } from "./Form";
 
 export default function Address({
   index,
@@ -11,8 +12,8 @@ export default function Address({
   setValue,
 }: {
   index: number;
-  register: UseFormRegister<FieldValues>;
-  setValue: UseFormSetValue<FieldValues>;
+  register: UseFormRegister<Form>;
+  setValue: UseFormSetValue<Form>;
 }) {
   const { state, city } = useAppSelector((state) => state.form);
   const dispatch = useAppDispatch();

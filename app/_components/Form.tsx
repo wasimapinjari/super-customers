@@ -1,4 +1,9 @@
-import { addCustomer, updateCustomer } from "@/redux/customerSlice";
+import {
+  addCustomer,
+  CustomerKeys,
+  CustomerState,
+  updateCustomer,
+} from "@/redux/customerSlice";
 import {
   resetForm,
   setCity,
@@ -15,18 +20,39 @@ import { FieldValues, useForm } from "react-hook-form";
 import Address from "./Address";
 import InputText from "./InputText";
 
+export type Form = FormMain & FormAddress;
+
+type FormMain = {
+  id: string;
+  pan: string;
+  fullName: string;
+  email: string;
+  mobileNumber: number;
+};
+
+type AddressNumber = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
+
+type FormAddress = {
+  [K in (typeof addressKeys)[number] as `${K}-${AddressNumber}`]: K extends "postCode"
+    ? number
+    : string;
+};
+
 const addressKeys = [
   "addressLine1",
   "addressLine2",
   "postCode",
   "state",
   "city",
-];
+] as const;
+
+const isKeyOfFormMain = (k: string): k is keyof FormMain =>
+  addressKeys.map((key) => k.startsWith(key)).includes(true) ? false : true;
 
 export default function Form({
   customerData,
 }: {
-  customerData?: Record<string, any>;
+  customerData?: CustomerState;
 }) {
   const router = useRouter();
 
@@ -39,7 +65,7 @@ export default function Form({
     unregister,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<Form>();
 
   const [addresses, setAddresses] = useState<JSX.Element[]>([]);
 
@@ -54,14 +80,20 @@ export default function Form({
 
   const fillData = useRef(() => {
     if (customerData) {
-      const addressData = (index: string, key: string) =>
-        customerData?.["addresses"][index][key];
-      const setAddressValue = (index: string, key: string) =>
-        setValue(`${key}-${index}`, addressData(index, key));
+      const addressData = (
+        index: AddressNumber,
+        key: (typeof addressKeys)[number],
+      ) => customerData?.["addresses"][index][key];
+      const setAddressValue = (
+        index: AddressNumber,
+        key: (typeof addressKeys)[number],
+      ) => setValue(`${key}-${index}`, addressData(index, key));
       setAddresses([]);
-      for (const key in customerData) {
+      for (const customerKey in customerData) {
+        const key = customerKey as keyof CustomerState;
         if (key === "addresses") {
-          for (const index in customerData["addresses"]) {
+          for (const addressIndex in customerData["addresses"]) {
+            const index = +addressIndex as AddressNumber;
             setAddresses((a: JSX.Element[]) => [
               ...a,
               addressElement.current(+index),
@@ -72,13 +104,13 @@ export default function Form({
           }
           continue;
         }
-        setValue(key, customerData[key]);
+        if (isKeyOfFormMain(key)) setValue(key, customerData[key]);
       }
     }
   });
 
   useEffect(() => {
-    setValue("name", fullName);
+    setValue("fullName", fullName);
   }, [fullName, setValue, pan]);
 
   useEffect(() => {
@@ -98,7 +130,9 @@ export default function Form({
 
   function handleDeleteAddress() {
     setAddresses((a) => a.slice(0, a.length - 1));
-    addressKeys.forEach((key) => unregister(`${key}-${addresses.length - 1}`));
+    addressKeys.forEach((key) =>
+      unregister(`${key}-${(addresses.length - 1) as AddressNumber}`),
+    );
   }
 
   function onSubmit(data: FieldValues) {
@@ -123,6 +157,7 @@ export default function Form({
       : dispatch(addCustomer(customer));
     router.push("/");
     dispatch(resetForm());
+    console.log(data);
   }
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -153,14 +188,14 @@ export default function Form({
         />
         <InputText
           label="Full Name"
-          {...register("name", {
+          {...register("fullName", {
             required: {
               value: true,
               message: "Full Name is required",
             },
             // Full name => Name + Surname => More than 1 word => Ram Gopal Swami Iyere
-            validate: (name: string = "") =>
-              name.split(" ").length > 1 || "Please Enter Full Name",
+            validate: (fullName: string = "") =>
+              fullName.split(" ").length > 1 || "Please Enter Full Name",
             maxLength: {
               value: 140,
               message: "Maximum Name Characters Limit: 140)",
@@ -212,7 +247,7 @@ export default function Form({
                   message: "Please Enter Valid 10 Digit Number",
                 },
                 onChange: (e) => {
-                  setValue("number", e.target.value.toLowerCase());
+                  setValue("mobileNumber", e.target.value.toLowerCase());
                 },
               })}
             />

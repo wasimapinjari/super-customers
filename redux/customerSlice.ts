@@ -1,9 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+export type CustomerState = (typeof initialState)[0];
+
+export type CustomerKeys = keyof CustomerState;
+
 export const initialState = [
   {
     id: crypto.randomUUID(),
-    name: "Rakesh Sharma",
+    fullName: "Rakesh Sharma",
     email: "rakesh@gmail.com",
     pan: "HOJOX2345F",
     mobileNumber: 8043434334,
@@ -26,7 +30,7 @@ export const initialState = [
   },
   {
     id: crypto.randomUUID(),
-    name: "Shreya Kulkarni",
+    fullName: "Shreya Kulkarni",
     email: "shreya@gmail.com",
     pan: "SIPLB2342U",
     mobileNumber: 7734538392,
@@ -42,7 +46,7 @@ export const initialState = [
   },
   {
     id: crypto.randomUUID(),
-    name: "Amol Jadhav",
+    fullName: "Amol Jadhav",
     email: "amol@gmail.com",
     pan: "FOKOI9145U",
     mobileNumber: 9134533498,

@@ -11,7 +11,7 @@ export default function Main() {
     <div className="flex flex-col items-center justify-center px-8 sm:min-w-full">
       <button
         onClick={() => router.push("/create")}
-        className="hover: mb-8 block rounded-md bg-gradient-to-b from-[white] to-[#fff7] to-[200%] px-4 py-2 text-center font-medium text-black hover:bg-white"
+        className="hover: mb-8 block rounded-md bg-gradient-to-b from-[white] to-[#fff0] to-[200%] px-4 py-2 text-center font-medium text-black hover:to-[#fff5]"
       >
         Create
       </button>

@@ -1,13 +1,18 @@
 import { deleteCustomer } from "@/redux/customerSlice";
+import { resetForm } from "@/redux/formSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Main() {
   const router = useRouter();
 
   const customers = useAppSelector((state) => state.customers);
   const dispatch = useAppDispatch();
-  console.log(customers);
+
+  useEffect(() => {
+    dispatch(resetForm());
+  }, [dispatch]);
   return (
     <div className="flex flex-col items-center justify-center px-8 sm:min-w-full">
       <button

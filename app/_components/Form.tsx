@@ -4,7 +4,6 @@ import {
   updateCustomer,
 } from "@/redux/customerSlice";
 import {
-  resetForm,
   setCity,
   setFocus,
   setName,
@@ -152,8 +151,6 @@ export default function Form({
       ? dispatch(updateCustomer({ ...customer, id: data.id }))
       : dispatch(addCustomer(customer));
     router.push("/");
-    dispatch(resetForm());
-    console.log(data);
   }
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -282,10 +279,7 @@ export default function Form({
           <button
             className="py-2 hover:text-red-400 sm:flex-grow sm:text-right"
             type="button"
-            onClick={() => {
-              router.push("/");
-              dispatch(resetForm());
-            }}
+            onClick={() => router.push("/")}
           >
             Cancel
           </button>

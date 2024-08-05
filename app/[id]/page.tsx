@@ -1,4 +1,5 @@
 export async function generateStaticParams() {
+  console.log(store.getState());
   return store.getState().customers.map((customer) => ({ id: customer.id }));
 }
 

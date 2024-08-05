@@ -7,6 +7,7 @@ export default function Main() {
 
   const customers = useAppSelector((state) => state.customers);
   const dispatch = useAppDispatch();
+  console.log(customers);
   return (
     <div className="flex flex-col items-center justify-center px-8 sm:min-w-full">
       <button
@@ -30,7 +31,7 @@ export default function Main() {
                 </h2>
                 <div className="space-x-2">
                   <button
-                    className="hover:text-green-400"
+                    className="hover:text-purple-400"
                     onClick={() => router.push("/" + customer.id)}
                   >
                     Edit

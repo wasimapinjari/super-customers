@@ -69,7 +69,7 @@ export default function Address({
           <label className="flex flex-col gap-1">
             State
             <select
-              className="block h-7 min-w-[6.2rem] rounded-md border-2 border-solid border-gray-400 bg-[#222] pl-[.15rem] text-slate-200 hover:bg-zinc-800"
+              className="scrollbar block h-7 min-w-[6.2rem] rounded-md border-2 border-solid border-gray-400 bg-[#222] pl-[.15rem] text-slate-200 hover:bg-zinc-800"
               {...register(`state-${index}`, {
                 required: {
                   value: true,
@@ -89,7 +89,7 @@ export default function Address({
           <label className="flex flex-col gap-1">
             City
             <select
-              className="block h-7 min-w-48 rounded-md border-2 border-solid border-gray-400 bg-[#222] pl-[.15rem] text-white hover:bg-zinc-800"
+              className="scrollbar block h-7 min-w-48 rounded-md border-2 border-solid border-gray-400 bg-transparent pl-[.15rem] text-white hover:bg-zinc-800"
               {...register(`city-${index}`, {
                 required: {
                   value: true,
@@ -100,7 +100,7 @@ export default function Address({
                 },
               })}
             >
-              <option value="" />
+              <option className="bg-transparent" value="" />
               {cities?.map((city, index) => (
                 <option key={index}>{city}</option>
               ))}

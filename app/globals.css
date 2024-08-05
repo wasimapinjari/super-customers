@@ -28,3 +28,8 @@
     background: radial-gradient(purple, black);
   }
 }
+
+::selection {
+  color: white;
+  background: rgb(128, 0, 128, 0.5);
+}

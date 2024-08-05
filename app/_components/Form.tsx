@@ -261,7 +261,7 @@ export default function Form({
         <div className="flex gap-4 sm:gap-2">
           {addresses.length < 10 && (
             <button
-              className="py-2 hover:text-green-400"
+              className="py-2 hover:text-purple-400"
               type="button"
               onClick={handleAddAddress}
             >
@@ -301,7 +301,7 @@ export default function Form({
           <button className="py-2 hover:text-red-400" type="reset">
             Reset
           </button>
-          <button className="py-2 hover:text-green-400" type="submit">
+          <button className="py-2 hover:text-purple-400" type="submit">
             {customerData ? "Update" : "Submit"}
           </button>
         </div>

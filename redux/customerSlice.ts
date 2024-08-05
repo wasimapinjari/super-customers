@@ -6,7 +6,7 @@ export type CustomerKeys = keyof CustomerState;
 
 export const initialState = [
   {
-    id: crypto.randomUUID(),
+    id: "crypto.randomUUID()",
     fullName: "Rakesh Sharma",
     email: "rakesh@gmail.com",
     pan: "HOJOX2345F",

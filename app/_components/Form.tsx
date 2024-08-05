@@ -149,7 +149,7 @@ export default function Form({
     customerData
       ? dispatch(updateCustomer({ ...customer, id: data.id }))
       : dispatch(addCustomer(customer));
-    (document.querySelector("#home") as HTMLAnchorElement).click();
+    // (document.querySelector("#home") as HTMLAnchorElement).click();
   }
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

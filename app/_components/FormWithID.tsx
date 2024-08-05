@@ -2,17 +2,21 @@
 
 import { useAppSelector } from "@/redux/hooks";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useRef } from "react";
 import Form from "./Form";
 
 export default function FormWithID({ id }: { id: string }) {
-  const router = useRouter();
-  const ref = useRef(null);
   const customer = useAppSelector((state) =>
     state.customers.find((customer) => customer?.id === id),
   );
-  if (!customer) return <Link href="/">Not found, Go back</Link>;
+  if (!customer)
+    return (
+      <Link
+        className="border-b-2 border-solid border-slate-200 hover:border-slate-400"
+        href="/"
+      >
+        Not found, Go back
+      </Link>
+    );
 
   return <Form customerData={customer} />;
 }

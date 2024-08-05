@@ -149,6 +149,7 @@ export default function Form({
     customerData
       ? dispatch(updateCustomer({ ...customer, id: data.id }))
       : dispatch(addCustomer(customer));
+    (document.querySelector("#home") as HTMLAnchorElement).click();
   }
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -294,11 +295,10 @@ export default function Form({
           <button className="py-2 hover:text-red-400" type="reset">
             Reset
           </button>
-          <Link href="/">
-            <button className="py-2 hover:text-purple-400" type="submit">
-              {customerData ? "Update" : "Submit"}
-            </button>
-          </Link>
+          <button className="py-2 hover:text-purple-400" type="submit">
+            {customerData ? "Update" : "Submit"}
+          </button>
+          <Link href="/" id="home" />
         </div>
       </div>
       <p className="ml-auto text-right text-red-400">

@@ -298,11 +298,11 @@ export default function Form({
           <button className="py-2 hover:text-purple-400" type="submit">
             {customerData ? "Update" : "Submit"}
           </button>
-          <Link href="/" id="home" />
+          <Link href="/" className="hidden" id="home" />
         </div>
       </div>
       <p className="ml-auto text-right text-red-400">
-        {Object.values(errors)[0]?.message as ReactNode}
+        &nbsp;{Object.values(errors)[0]?.message as ReactNode}
       </p>
     </form>
   );

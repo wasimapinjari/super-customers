@@ -1,17 +1,18 @@
 "use client";
 
 import { useAppSelector } from "@/redux/hooks";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useRef } from "react";
 import Form from "./Form";
-import { useEffect } from "react";
 
 export default function FormWithID({ id }: { id: string }) {
   const router = useRouter();
+  const ref = useRef(null);
   const customer = useAppSelector((state) =>
     state.customers.find((customer) => customer?.id === id),
   );
-  useEffect(() => {
-    if (!customer) router.push("/");
-  }, [customer, router]);
+  if (!customer) return <Link href="/">Not found, Go back</Link>;
+
   return <Form customerData={customer} />;
 }

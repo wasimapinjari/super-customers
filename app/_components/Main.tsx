@@ -1,12 +1,10 @@
 import { deleteCustomer } from "@/redux/customerSlice";
 import { resetForm } from "@/redux/formSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { useEffect } from "react";
 
 export default function Main() {
-  const router = useRouter();
-
   const customers = useAppSelector((state) => state.customers);
   const dispatch = useAppDispatch();
 
@@ -15,12 +13,11 @@ export default function Main() {
   }, [dispatch]);
   return (
     <div className="flex flex-col items-center justify-center px-8 sm:min-w-full">
-      <button
-        onClick={() => router.push("/create")}
-        className="hover: mb-8 block rounded-md bg-gradient-to-b from-[white] to-[#fff0] to-[200%] px-4 py-2 text-center font-medium text-black hover:to-[#fff5]"
-      >
-        Create
-      </button>
+      <Link href="/create">
+        <button className="hover: mb-8 block rounded-md bg-gradient-to-b from-[white] to-[#fff0] to-[200%] px-4 py-2 text-center font-medium text-black hover:to-[#fff5]">
+          Create
+        </button>
+      </Link>
       <div className="w-full space-y-4">
         {customers.map((customer) => {
           return (
@@ -35,12 +32,9 @@ export default function Main() {
                     : customer.fullName.substring(0, 20) + "..."}
                 </h2>
                 <div className="space-x-2">
-                  <button
-                    className="hover:text-purple-400"
-                    onClick={() => router.push("/" + customer.id)}
-                  >
-                    Edit
-                  </button>
+                  <Link href={"/" + customer.id}>
+                    <button className="hover:text-purple-400">Edit</button>
+                  </Link>
                   <button
                     className="hover:text-red-400"
                     onClick={() => dispatch(deleteCustomer(customer.id))}

@@ -12,9 +12,9 @@ import {
   validatePAN,
 } from "@/redux/formSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { ReactNode, useEffect, useRef, useState } from "react";
-import { FieldValues, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import Address from "./Address";
 import InputText from "./InputText";
 
@@ -49,8 +49,6 @@ export default function Form({
 }: {
   customerData?: CustomerState;
 }) {
-  const router = useRouter();
-
   const { fullName, pan } = useAppSelector((state) => state.form);
   const dispatch = useAppDispatch();
 
@@ -151,7 +149,6 @@ export default function Form({
     customerData
       ? dispatch(updateCustomer({ ...customer, id: data.id }))
       : dispatch(addCustomer(customer));
-    router.push("/");
   }
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -277,13 +274,14 @@ export default function Form({
           )}
         </div>
         <div className="flex gap-4 sm:flex-row-reverse sm:gap-2 sm:border-t-2 sm:border-solid sm:border-white">
-          <button
-            className="py-2 hover:text-red-400 sm:flex-grow sm:text-right"
-            type="button"
-            onClick={() => router.push("/")}
-          >
-            Cancel
-          </button>
+          <Link href="/">
+            <button
+              className="py-2 hover:text-red-400 sm:flex-grow sm:text-right"
+              type="button"
+            >
+              Cancel
+            </button>
+          </Link>
           {customerData && (
             <button
               className="py-2 hover:text-red-400"
@@ -296,9 +294,11 @@ export default function Form({
           <button className="py-2 hover:text-red-400" type="reset">
             Reset
           </button>
-          <button className="py-2 hover:text-purple-400" type="submit">
-            {customerData ? "Update" : "Submit"}
-          </button>
+          <Link href="/">
+            <button className="py-2 hover:text-purple-400" type="submit">
+              {customerData ? "Update" : "Submit"}
+            </button>
+          </Link>
         </div>
       </div>
       <p className="ml-auto text-right text-red-400">

@@ -130,12 +130,13 @@ export default function Form({
     );
   }
 
-  function onSubmit(data: FieldValues) {
+  function onSubmit(data: Form) {
     const customer: Record<string, any> = {
       id: crypto.randomUUID(),
       addresses: [],
     };
-    outerloop: for (const field in data) {
+    outerloop: for (const fieldKey in data) {
+      const field = fieldKey as keyof Form;
       for (const key of addressKeys) {
         if (field.startsWith(key)) {
           const addressKey: string = field.split("-")[0];

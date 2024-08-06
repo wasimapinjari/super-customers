@@ -31,20 +31,22 @@ export default function Main() {
           return (
             <div
               key={customer.id}
-              className="flex min-w-80 flex-col rounded-md border-2 border-solid border-gray-400 px-4 py-2 hover:bg-zinc-800 sm:min-w-max"
+              className="flex min-w-80 flex-col rounded-md border-2 border-solid border-gray-400 px-4 py-2 hover:bg-zinc-800 sm:min-w-max sm:gap-1"
             >
               <div className="mb-2 flex items-center justify-between gap-4 text-nowrap sm:flex-col sm:gap-0">
-                <h2 className="border-b-2 border-solid border-white text-lg sm:mb-2">
+                <h2 className="border-b-2 border-solid border-purple-400/30 text-lg sm:mb-1">
                   {customer.fullName.length < 20
                     ? customer.fullName
                     : customer.fullName.substring(0, 20) + "..."}
                 </h2>
-                <div className="space-x-2">
+                <div className="space-x-1">
                   <Link href={"/" + customer.id}>
-                    <button className="hover:text-purple-400">Edit</button>
+                    <button className="px-[.1rem] hover:bg-purple-400/10 hover:text-purple-400">
+                      Edit
+                    </button>
                   </Link>
                   <button
-                    className="hover:text-red-400"
+                    className="px-[.1rem] hover:bg-red-400/10 hover:text-red-400"
                     onClick={() => dispatch(deleteCustomer(customer.id))}
                   >
                     Delete

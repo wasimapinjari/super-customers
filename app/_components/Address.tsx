@@ -67,7 +67,11 @@ export default function Address({
         />
         <div className="mb-4 flex justify-between gap-3 sm:flex-col">
           <label className="flex flex-col gap-1">
-            State
+            <span>
+              <span className="text-neutral-3 bg-purple-400/10 px-[.1rem]">
+                State
+              </span>
+            </span>
             <select
               className="scrollbar block h-7 min-w-[6.2rem] rounded-md border-2 border-solid border-gray-400 bg-[#222] pl-[.15rem] text-slate-200 hover:bg-zinc-800"
               {...register(`state-${index}`, {
@@ -87,7 +91,11 @@ export default function Address({
             </select>
           </label>
           <label className="flex flex-col gap-1">
-            City
+            <span>
+              <span className="text-neutral-3 bg-purple-400/10 px-[.1rem]">
+                City
+              </span>
+            </span>
             <select
               className="scrollbar block h-7 min-w-48 rounded-md border-2 border-solid border-gray-400 bg-transparent pl-[.15rem] text-white hover:bg-zinc-800"
               {...register(`city-${index}`, {

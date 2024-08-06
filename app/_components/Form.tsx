@@ -223,12 +223,14 @@ export default function Form({
           })}
         />
         <label className="flex flex-col gap-[.01rem]">
-          Mobile Number
+          <span>
+            <span className="bg-purple-400/10 px-[.1rem]">Mobile Number</span>
+          </span>
           <div className="flex gap-[.4rem] border-b-2 border-solid border-gray-400 bg-[#222] text-white focus:outline-none">
-            <span className="">+91</span>
+            <span>+91</span>
             <input
               type="number"
-              className="bg-[#222] pb-1 text-white focus:outline-none"
+              className="w-full bg-[#222] pb-1 text-white focus:outline-none"
               {...register("mobileNumber", {
                 required: {
                   value: true,
@@ -249,15 +251,15 @@ export default function Form({
 
       <p className="mb-2">Address</p>
 
-      <div className="space-y-4">
+      <div className="mb-2 space-y-4">
         {addresses.map((address: JSX.Element) => address)}
       </div>
 
       <div className="flex justify-between gap-4 sm:flex-col sm:gap-2">
-        <div className="flex gap-4 sm:gap-2">
+        <div className="mb-4 flex gap-4 sm:gap-2">
           {addresses.length < 10 && (
             <button
-              className="py-2 hover:text-purple-400"
+              className="px-[.1rem] hover:bg-purple-400/10 hover:text-purple-400"
               type="button"
               onClick={handleAddAddress}
             >
@@ -266,7 +268,7 @@ export default function Form({
           )}
           {addresses.length > 1 && (
             <button
-              className="py-2 hover:text-red-400"
+              className="px-[.1rem] hover:bg-red-400/10 hover:text-red-400"
               type="button"
               onClick={handleDeleteAddress}
             >
@@ -274,10 +276,10 @@ export default function Form({
             </button>
           )}
         </div>
-        <div className="flex gap-4 sm:flex-row-reverse sm:gap-2 sm:border-t-2 sm:border-solid sm:border-white">
-          <Link href="/">
+        <div className="flex items-start justify-end gap-4 sm:flex-row-reverse sm:items-center sm:gap-2 sm:border-t-2 sm:border-solid sm:border-white sm:pt-2">
+          <Link href="/" className="m-0">
             <button
-              className="py-2 hover:text-red-400 sm:flex-grow sm:text-right"
+              className="px-[.1rem] hover:bg-red-400/10 hover:text-red-400 sm:flex-grow sm:text-right"
               type="button"
             >
               Cancel
@@ -285,17 +287,23 @@ export default function Form({
           </Link>
           {customerData && (
             <button
-              className="py-2 hover:text-red-400"
+              className="px-[.1rem] hover:bg-red-400/10 hover:text-red-400"
               type="button"
               onClick={() => fillData.current()}
             >
               Default
             </button>
           )}
-          <button className="py-2 hover:text-red-400" type="reset">
+          <button
+            className="px-[.1rem] hover:bg-red-400/10 hover:text-red-400"
+            type="reset"
+          >
             Reset
           </button>
-          <button className="py-2 hover:text-purple-400" type="submit">
+          <button
+            className="px-[.1rem] hover:bg-purple-400/10 hover:text-purple-400"
+            type="submit"
+          >
             {customerData ? "Update" : "Submit"}
           </button>
           <Link href="/" className="hidden" id="home" />

@@ -1,6 +1,6 @@
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
-import ReduxProvider from "../redux/Provider";
+import dynamic from "next/dynamic";
 import "./globals.css";
 import GrainyTexture from "./_components/GrainyTexture";
 
@@ -8,6 +8,10 @@ export const metadata: Metadata = {
   title: "Super-Customers",
   description: "Happy Customers Hub",
 };
+
+const ReduxProvider = dynamic(() => import("../redux/Provider"), {
+  ssr: false,
+});
 
 export default function RootLayout({
   children,

@@ -16,7 +16,10 @@ export default forwardRef(function InputText(
   return (
     <label className="flex flex-col gap-[.01rem]">
       <span>
-        {label}&nbsp;
+        <span className="bg-purple-400/10 px-[.1rem] text-neutral-300">
+          {label}
+        </span>
+        &nbsp;
         {spinner && focusInput === inputName && isLoading && (
           <Spinner className="mb-1 inline w-4" />
         )}

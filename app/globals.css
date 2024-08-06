@@ -27,6 +27,11 @@
   .gradient {
     background: radial-gradient(purple, black);
   }
+
+  .bg-purple {
+    background: rgb(128, 0, 128, 0.2);
+    padding: 0 0.1rem;
+  }
 }
 
 ::selection {

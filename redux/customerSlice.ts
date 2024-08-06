@@ -81,10 +81,13 @@ const customerSlice = createSlice({
       );
       state[index] = action.payload;
     },
+    resetCustomer() {
+      return initialState;
+    },
   },
 });
 
 export default customerSlice.reducer;
 
-export const { addCustomer, deleteCustomer, updateCustomer } =
+export const { addCustomer, deleteCustomer, updateCustomer, resetCustomer } =
   customerSlice.actions;

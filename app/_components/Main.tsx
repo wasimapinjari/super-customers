@@ -1,4 +1,4 @@
-import { deleteCustomer } from "@/redux/customerSlice";
+import { deleteCustomer, resetCustomer } from "@/redux/customerSlice";
 import { resetForm } from "@/redux/formSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import Link from "next/link";
@@ -18,6 +18,14 @@ export default function Main() {
           Create
         </button>
       </Link>
+      {!customers.length && (
+        <button
+          onClick={() => dispatch(resetCustomer())}
+          className="hover: mb-8 block rounded-md bg-gradient-to-b from-[white] to-[#fff0] to-[200%] px-4 py-2 text-center font-medium text-black hover:to-[#fff5]"
+        >
+          Reset
+        </button>
+      )}
       <div className="w-full space-y-4">
         {customers.map((customer) => {
           return (
